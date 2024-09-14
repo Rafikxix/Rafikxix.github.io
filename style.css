@@ -28,7 +28,7 @@ body{
     border: 2px solid rgba(0, 0, 0, 0.237);
     border-radius: 10px;
     margin: 10px;
-    width: 300px;
+    width: 50%;
 }
 
 button[type="submit"]{
@@ -52,7 +52,7 @@ button[type="submit"]:hover{
     background: linear-gradient(180deg, rgb(44, 44, 250), rgb(255, 178, 36));
     padding: 50px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.635);
-    min-width: 300px;
+    min-width: 40%;
     display: none;
     flex-direction: column;
     align-items: center;
@@ -102,4 +102,34 @@ p{
     font-size: 2.5em;
     font-weight: bold;
     color: rgba(0, 0, 0, 0.735);
+}
+
+@media only screen and (max-width: 500px){
+    #topbar{
+        height: 70px;
+    }
+    #topbar h1{
+        font-size: 2em;
+    }
+    .cityInput{
+        font-size: 1.5em;
+    }
+    .weatherForm button{
+        font-size: 1.1em;
+    }
+    .card{
+        padding: 10px;
+    }
+    .card h1{
+        font-size: 3em;
+    }
+    /* .card p{
+        font-size: 1.2em;
+    } */
+    .tempDisplay{
+        font-size: 2em;
+    }
+    .weatherEmoji{
+        font-size: 5em;
+    }
 }
