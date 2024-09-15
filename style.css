@@ -1,6 +1,6 @@
 body{
     font-family: Arial, sans-serif;
-    background-image: url(images/worldmap2.jpg);
+    background-image: url(images/background3.jpg);
     background-repeat: no-repeat; 
     background-position: center;
     background-attachment: fixed; 
@@ -18,7 +18,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(180deg, rgba(44, 44, 250, 0.9), rgba(255, 178, 36, 0.909));
+    background: linear-gradient(180deg, rgba(44, 44, 250, 0.9), rgba(255, 68, 0, 0.721));
     color: white;
 }
 
