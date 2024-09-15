@@ -66,7 +66,7 @@ function displayWeatherInfo(data){
     const sunset_date = new Date(0,0,0,0,0,sunset);
     sunriseDisplay.textContent = `🌇 Sunrise: ${sunrise_date.getHours().toString().padStart(2,0)}:${sunrise_date.getMinutes().toString().padStart(2,0)}:${sunrise_date.getSeconds().toString().padStart(2,0)} (UTC ${offset > 0 ? `+${(offset/60).toString().padStart(2,0)}`: (offset/60).toString().padStart(2,0)})`
     sunsetDisplay.textContent = `🌆 Sunset: ${sunset_date.getHours().toString().padStart(2,0)}:${sunset_date.getMinutes().toString().padStart(2,0)}:${sunset_date.getSeconds().toString().padStart(2,0)} (UTC ${offset > 0 ? `+${(offset/60).toString().padStart(2,0)}`: (offset/60).toString().padStart(2,0)})`
-    tempDisplay.textContent = `${(temp - 273.15).toFixed(1)}°C`;
+    tempDisplay.textContent = `${(temp - 273.15).toFixed(1)}°C | ${(((temp - 273.15) * 1.8) + 32).toFixed(1)}°F`;
     humidityDisplay.textContent = `💦 Humidity: ${humidity}%`;
     descDisplay.textContent = description;
     weatherEmoji.textContent = getWeatherEmoji(id);
