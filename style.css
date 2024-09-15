@@ -1,9 +1,9 @@
 body{
     font-family: Arial, sans-serif;
-    background-image: url(images/worldmap.jpg);
-    background-repeat: no-repeat; /*if u use a smaller pic it won't repeat it to fill background*/
+    background-image: url(images/worldmap3.avif);
+    background-repeat: no-repeat; 
     background-position: center;
-    background-attachment: fixed; /*weather a background image scrolls with the page or is fixed */
+    background-attachment: fixed; 
     background-size: cover; 
     display: flex;
     flex-direction: column;
@@ -18,7 +18,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(180deg, rgba(44, 44, 250, 0.776), rgba(255, 178, 36, 0.868));
+    background: linear-gradient(180deg, rgba(44, 44, 250, 0.9), rgba(255, 178, 36, 0.909));
     color: white;
 }
 
@@ -52,7 +52,7 @@ button[type="submit"]:hover{
 
 .card{
     margin-top: 30px;
-    border-radius: 5px;
+    border-radius: 20px;
     background: linear-gradient(180deg, rgb(38, 38, 255), rgb(255, 166, 0));
     padding: 50px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.635);
@@ -62,7 +62,7 @@ button[type="submit"]:hover{
     align-items: center;
     background-repeat: no-repeat; /*if u use a smaller pic it won't repeat it to fill background*/
     background-position: center;
-    background-attachment: fixed; /*weather a background image scrolls with the page or is fixed */
+    background-attachment: scroll; /*weather a background image scrolls with the page or is fixed */
     background-size: cover; 
 }
 
