@@ -110,7 +110,7 @@ function getWeatherEmoji(weatherId){
             return "🌞";
         case (weatherId > 800 && weatherId <= 809):
             card.style.color= "white";
-            card.style.backgroundPosition = "-300px";
+            card.style.backgroundPosition = "-3900px";
             card.style.backgroundImage = "url(images/cloudysky.jpg)";
             return "☁️";
         default:
