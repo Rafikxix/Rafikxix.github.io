@@ -83,26 +83,34 @@ function displayWeatherInfo(data){
 function getWeatherEmoji(weatherId){
     switch(true){
         case (weatherId >= 200 && weatherId < 300):
+            card.style.color= "black";
             card.style.backgroundImage = "url(images/thunderstorm-and-lightning.webp)";
             card.style.backgroundPosition = "0px 50px";
             return "⛈️";
         case (weatherId >= 300 && weatherId < 400):
+            card.style.color= "black";
             card.style.backgroundImage = "url(images/rainy.jpg)";
             return "🌨️";
         case (weatherId >= 500 && weatherId < 600):
-            card.style.backgroundImage = "url(images/heavyrainy.jpg)";
+            card.style.color= "black";
+            card.style.backgroundImage = "url(images/rainy.jpg)";
             return "🌧️";
         case (weatherId >= 600 && weatherId < 700):
+            card.style.color= "black";
             card.style.backgroundPosition = "0px 50px";
             card.style.backgroundImage = "url(images/snowy.jpg)";
             return "❄️";
         case (weatherId >= 700 && weatherId < 800):
+            card.style.color= "black";
             card.style.backgroundImage = "url(images/misty.jpg)";
             return "🌫️";
         case (weatherId == 800):
+            card.style.color= "black";
             card.style.backgroundImage = "url(images/clearsky2.jpg)";
             return "🌞";
         case (weatherId > 800 && weatherId <= 809):
+            card.style.color= "white";
+            card.style.backgroundPosition = "-300px";
             card.style.backgroundImage = "url(images/cloudysky.jpg)";
             return "☁️";
         default:
