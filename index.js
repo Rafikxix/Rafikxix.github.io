@@ -1,6 +1,7 @@
 const weatherForm = document.querySelector(".weatherForm");
 const cityInput = document.querySelector(".cityInput");
 const card = document.querySelector(".card");
+const background = document.querySelector("#background");
 
 
 const cityDisplay = document.createElement("h1")
@@ -98,12 +99,14 @@ function getWeatherEmoji(weatherId){
                 card.style.color= "black";
                 card.style.backgroundPosition = "0px 50px";
                 card.style.backgroundImage = "url(images/thunderstorm-and-lightning.webp)";
+                background.style.backgroundImage = "url(images/thunderstormnight.jpg)";
                 
             }
             else{
                 card.style.color= "black";
                 card.style.backgroundPosition = "-300px 0px";
                 card.style.backgroundImage = "url(images/thunderstormnight.jpg)";
+                background.style.backgroundImage = "url(images/thunderstormnight.jpg)";
             }
             
             return "⛈️";
@@ -113,11 +116,13 @@ function getWeatherEmoji(weatherId){
                 card.style.color= "black";
                 card.style.backgroundPosition = "center";
                 card.style.backgroundImage = "url(images/rainy.jpg)";
+                background.style.backgroundImage = "url(images/cloudysky.jpg)";
             }
             else{
                 card.style.color= "white";
                 card.style.backgroundPosition = "center";
                 card.style.backgroundImage = "url(images/rainynight.jpg)";
+                background.style.backgroundImage = "url(images/rainynight.jpg)";
             }
             return "🌨️";
         case (weatherId >= 500 && weatherId < 600):
@@ -126,12 +131,14 @@ function getWeatherEmoji(weatherId){
                 card.style.color= "black";
                 card.style.backgroundPosition = "center";
                 card.style.backgroundImage = "url(images/heavyrainy.jpg)";
+                background.style.backgroundImage = "url(images/cloudysky.jpg)";
             }
             else
             {
                 card.style.color= "white";
                 card.style.backgroundPosition = "0px";
                 card.style.backgroundImage = "url(images/heavyrainnight.jpg)";
+                background.style.backgroundImage = "url(images/rainynight.jpg)";
             }
             
             return "🌧️";
@@ -141,10 +148,12 @@ function getWeatherEmoji(weatherId){
                 card.style.color= "black";
                 card.style.backgroundPosition = "center";
                 card.style.backgroundImage = "url(images/snowy.jpg)";
+                background.style.backgroundImage = "url(images/snowy.jpg)";
             }
             else{
                 card.style.color= "black";
                 card.style.backgroundImage = "url(images/snowynight.jpg)";
+                background.style.backgroundImage = "url(images/snowynight.jpg)";
             }
             
             return "❄️";
@@ -154,11 +163,13 @@ function getWeatherEmoji(weatherId){
                 card.style.color= "black";
                 card.style.backgroundPosition = "center";
                 card.style.backgroundImage = "url(images/misty.jpg)";
+                background.style.backgroundImage = "url(images/misty.jpg)";
             }
             else{
                 card.style.color= "black";
                 card.style.backgroundPosition = "center";
                 card.style.backgroundImage = "url(images/mistynight.jpeg)";
+                background.style.backgroundImage = "url(images/mistynight.jpeg)";
             }
             
             return "🌫️";
@@ -168,12 +179,14 @@ function getWeatherEmoji(weatherId){
                 card.style.color= "black";
                 card.style.backgroundPosition = "-200px";
                 card.style.backgroundImage = "url(images/clearsky2.jpg)";
+                background.style.backgroundImage = "url(images/clearsky2.jpg)";
                 return "🌞";
             }
             else{
                 card.style.color= "white";
                 card.style.backgroundPosition = "-500px";
                 card.style.backgroundImage = "url(images/clearskynight2.jpg)";
+                background.style.backgroundImage = "url(images/clearskynight2.jpg)";
                 return "🌒";
             }
             
@@ -184,12 +197,14 @@ function getWeatherEmoji(weatherId){
                 card.style.color= "white";
                 card.style.backgroundPosition = "-200px";
                 card.style.backgroundImage = "url(images/cloudysky.jpg)";
+                background.style.backgroundImage = "url(images/cloudysky.jpg)";
                 return "☁️";
             }
             else{
                 card.style.color= "white";
                 card.style.backgroundPosition = "-300px";
                 card.style.backgroundImage = "url(images/cloudynightsky.jpg)";
+                background.style.backgroundImage = "url(images/cloudynightsky.jpg)";
                 return "☁️";
             }
             
