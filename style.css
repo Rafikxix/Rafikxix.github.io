@@ -130,6 +130,7 @@ p{
         font-size: 1.1em;
     }
     .card{
+        min-width: 70%;
         padding: 10px;
     }
     .card h1{
