@@ -12,6 +12,9 @@ tempDisplay.classList.add("tempDisplay");
 const humidityDisplay = document.createElement("p")
 humidityDisplay.classList.add("humidityDisplay");
 
+const localTimeDisplay = document.createElement("p");
+localTimeDisplay.classList.add("timeDisplay");
+
 const sunriseDisplay = document.createElement("p");
 sunriseDisplay.classList.add("timeDisplay");
 
@@ -23,6 +26,8 @@ descDisplay.classList.add("descDisplay");
 
 const weatherEmoji = document.createElement("p");
 weatherEmoji.classList.add("weatherEmoji");
+
+let sunset_date, sunrise_date;
 
 
 const apiKey= "ddaf32989073ff4563b6c73d14327191";
@@ -56,16 +61,20 @@ async function getWeatherData(city){
 }
 
 function displayWeatherInfo(data){
-    let offset = new Date().getTimezoneOffset();
-    offset = -offset;
-    const {name: city,sys:{country,id_,sunrise,sunset}, main: {temp, humidity}, weather: [{description, id}]} = data; //destructuring
+    console.log(data)
+    // let offset = new Date().getTimezoneOffset();
+    // offset = -offset;
+    const {dt: currenrtTime,name: city,sys:{country,id_,sunrise,sunset}, main: {temp, humidity},timezone: offset, weather: [{description, id}]} = data; //destructuring
     card.textContent = "";
     card.style.display = "flex";
     cityDisplay.textContent = `${city}(${getFlagEmoji(country)})`;
-    const sunrise_date = new Date(0,0,0,0,0,sunrise);
-    const sunset_date = new Date(0,0,0,0,0,sunset);
-    sunriseDisplay.textContent = `🌇 Sunrise: ${sunrise_date.getHours().toString().padStart(2,0)}:${sunrise_date.getMinutes().toString().padStart(2,0)}:${sunrise_date.getSeconds().toString().padStart(2,0)} (UTC ${offset > 0 ? `+${(offset/60).toString().padStart(2,0)}`: (offset/60).toString().padStart(2,0)})`
-    sunsetDisplay.textContent = `🌆 Sunset: ${sunset_date.getHours().toString().padStart(2,0)}:${sunset_date.getMinutes().toString().padStart(2,0)}:${sunset_date.getSeconds().toString().padStart(2,0)} (UTC ${offset > 0 ? `+${(offset/60).toString().padStart(2,0)}`: (offset/60).toString().padStart(2,0)})`
+    sunrise_date = new Date(0,0,0,0,0,sunrise+offset);
+    sunset_date = new Date(0,0,0,0,0,sunset+offset);
+    local_date = new Date();
+    local_time = (local_date.getHours()+offset/3600-1)%24
+    localTimeDisplay.textContent = `🕛 Local time: ${local_time.toString().padStart(2,0)}:${local_date.getMinutes().toString().padStart(2,0)}:${local_date.getSeconds().toString().padStart(2,0)}`
+    sunriseDisplay.textContent = `🌇 Sunrise time: ${sunrise_date.getHours().toString().padStart(2,0)}:${sunrise_date.getMinutes().toString().padStart(2,0)}:${sunrise_date.getSeconds().toString().padStart(2,0)}` //(UTC ${offset > 0 ? `+${(offset/60).toString().padStart(2,0)}`: (offset/60).toString().padStart(2,0)})`
+    sunsetDisplay.textContent = `🌆 Sunset time: ${sunset_date.getHours().toString().padStart(2,0)}:${sunset_date.getMinutes().toString().padStart(2,0)}:${sunset_date.getSeconds().toString().padStart(2,0)}` //(UTC ${offset > 0 ? `+${(offset/60).toString().padStart(2,0)}`: (offset/60).toString().padStart(2,0)})`
     tempDisplay.textContent = `${(temp - 273.15).toFixed(1)}°C | ${(((temp - 273.15) * 1.8) + 32).toFixed(1)}°F`;
     humidityDisplay.textContent = `💦 Humidity: ${humidity}%`;
     descDisplay.textContent = description;
@@ -74,6 +83,7 @@ function displayWeatherInfo(data){
     card.appendChild(cityDisplay);
     card.appendChild(tempDisplay);
     card.appendChild(humidityDisplay);
+    card.appendChild(localTimeDisplay);
     card.appendChild(sunriseDisplay);
     card.appendChild(sunsetDisplay);
     card.appendChild(descDisplay);
@@ -83,39 +93,106 @@ function displayWeatherInfo(data){
 function getWeatherEmoji(weatherId){
     switch(true){
         case (weatherId >= 200 && weatherId < 300):
-            card.style.color= "black";
-            card.style.backgroundImage = "url(images/thunderstorm-and-lightning.webp)";
-            card.style.backgroundPosition = "0px 50px";
+            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            {
+                card.style.color= "black";
+                card.style.backgroundPosition = "0px 50px";
+                card.style.backgroundImage = "url(images/thunderstorm-and-lightning.webp)";
+                
+            }
+            else{
+                card.style.color= "black";
+                card.style.backgroundPosition = "-300px 0px";
+                card.style.backgroundImage = "url(images/thunderstormnight.jpg)";
+            }
+            
             return "⛈️";
         case (weatherId >= 300 && weatherId < 400):
-            card.style.color= "black";
-            card.style.backgroundPosition = "center";
-            card.style.backgroundImage = "url(images/rainy.jpg)";
+            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            {
+                card.style.color= "black";
+                card.style.backgroundPosition = "center";
+                card.style.backgroundImage = "url(images/rainy.jpg)";
+            }
+            else{
+                card.style.color= "white";
+                card.style.backgroundPosition = "center";
+                card.style.backgroundImage = "url(images/rainynight.jpg)";
+            }
             return "🌨️";
         case (weatherId >= 500 && weatherId < 600):
-            card.style.color= "black";
-            card.style.backgroundPosition = "center";
-            card.style.backgroundImage = "url(images/heavyrainy.jpg)";
+            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            {
+                card.style.color= "black";
+                card.style.backgroundPosition = "center";
+                card.style.backgroundImage = "url(images/heavyrainy.jpg)";
+            }
+            else
+            {
+                card.style.color= "white";
+                card.style.backgroundPosition = "0px";
+                card.style.backgroundImage = "url(images/heavyrainnight.jpg)";
+            }
+            
             return "🌧️";
         case (weatherId >= 600 && weatherId < 700):
-            card.style.color= "black";
-            card.style.backgroundImage = "url(images/snowy.jpg)";
+            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            {
+                card.style.color= "black";
+                card.style.backgroundPosition = "center";
+                card.style.backgroundImage = "url(images/snowy.jpg)";
+            }
+            else{
+                card.style.color= "black";
+                card.style.backgroundImage = "url(images/snowynight.jpg)";
+            }
+            
             return "❄️";
         case (weatherId >= 700 && weatherId < 800):
-            card.style.color= "black";
-            card.style.backgroundPosition = "center";
-            card.style.backgroundImage = "url(images/misty.jpg)";
+            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            {
+                card.style.color= "black";
+                card.style.backgroundPosition = "center";
+                card.style.backgroundImage = "url(images/misty.jpg)";
+            }
+            else{
+                card.style.color= "black";
+                card.style.backgroundPosition = "center";
+                card.style.backgroundImage = "url(images/mistynight.jpeg)";
+            }
+            
             return "🌫️";
         case (weatherId == 800):
-            card.style.color= "black";
-            card.style.backgroundPosition = "-200px";
-            card.style.backgroundImage = "url(images/clearsky2.jpg)";
-            return "🌞";
+            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            {
+                card.style.color= "black";
+                card.style.backgroundPosition = "-200px";
+                card.style.backgroundImage = "url(images/clearsky2.jpg)";
+                return "🌞";
+            }
+            else{
+                card.style.color= "white";
+                card.style.backgroundPosition = "-500px";
+                card.style.backgroundImage = "url(images/clearskynight2.jpg)";
+                return "🌒";
+            }
+            
+            
         case (weatherId > 800 && weatherId <= 809):
-            card.style.color= "white";
-            card.style.backgroundPosition = "-200px";
-            card.style.backgroundImage = "url(images/cloudysky.jpg)";
-            return "☁️";
+            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            {
+                card.style.color= "white";
+                card.style.backgroundPosition = "-200px";
+                card.style.backgroundImage = "url(images/cloudysky.jpg)";
+                return "☁️";
+            }
+            else{
+                card.style.color= "white";
+                card.style.backgroundPosition = "-300px";
+                card.style.backgroundImage = "url(images/cloudynightsky.jpg)";
+                return "☁️";
+            }
+            
         default:
             return "?";
 
