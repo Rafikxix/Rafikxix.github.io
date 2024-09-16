@@ -130,6 +130,8 @@ function displayError(message){
 
     card.textContent = "";
     card.style.display = "flex";
+    card.style.backgroundImage ="";
+    card.style.backgroundPosition = "center";
     card.appendChild(errorDisplay)
     
 }
