@@ -3,21 +3,24 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
 #background{
     position: fixed;
+    border: 0px;
+    margin: 0px;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-image: url('images/background7.jpg');
+    background-image: url('images/background1.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
     filter: blur(3px);
-    -webkit-filter: blur(3px);
+    
     z-index: -1; 
 }
 
