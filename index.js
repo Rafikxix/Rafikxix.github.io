@@ -122,7 +122,7 @@ function getWeatherEmoji(weatherId){
                 card.style.color= "white";
                 card.style.backgroundPosition = "center";
                 card.style.backgroundImage = "url(images/rainynight.jpg)";
-                background.style.backgroundImage = "url(images/rainynight.jpg)";
+                background.style.backgroundImage = "url(images/rainynight.jpeg)";
             }
             return "🌨️";
         case (weatherId >= 500 && weatherId < 600):
@@ -138,7 +138,7 @@ function getWeatherEmoji(weatherId){
                 card.style.color= "white";
                 card.style.backgroundPosition = "0px";
                 card.style.backgroundImage = "url(images/heavyrainnight.jpg)";
-                background.style.backgroundImage = "url(images/rainynight.jpg)";
+                background.style.backgroundImage = "url(images/rainynight.jpeg)";
             }
             
             return "🌧️";
