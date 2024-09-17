@@ -180,7 +180,7 @@ function getWeatherEmoji(weatherId){
                 card.style.backgroundPosition = "-200px";
                 card.style.backgroundImage = "url(images/clearsky2.jpg)";
                 background.style.backgroundImage = "url(images/clearsky2.jpg)";
-                return "🌞";
+                return "☀️";
             }
             else{
                 card.style.color= "white";
