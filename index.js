@@ -28,7 +28,7 @@ descDisplay.classList.add("descDisplay");
 const weatherEmoji = document.createElement("p");
 weatherEmoji.classList.add("weatherEmoji");
 
-let sunset_date, sunrise_date;
+let local_date,sunset_date, sunrise_date;
 
 
 const apiKey= "ddaf32989073ff4563b6c73d14327191";
@@ -65,14 +65,17 @@ function displayWeatherInfo(data){
     console.log(data)
     // let offset = new Date().getTimezoneOffset();
     // offset = -offset;
-    const {dt: currenrtTime,name: city,sys:{country,id_,sunrise,sunset}, main: {temp, humidity},timezone: offset, weather: [{description, id}]} = data; //destructuring
+    const {name: city,sys:{country,id_,sunrise,sunset}, main: {temp, humidity},timezone: offset, weather: [{description, id}]} = data; //destructuring
     card.textContent = "";
     card.style.display = "flex";
     cityDisplay.textContent = `${city}(${getFlagEmoji(country)})`;
     sunrise_date = new Date(0,0,0,0,0,sunrise+offset);
     sunset_date = new Date(0,0,0,0,0,sunset+offset);
     local_date = new Date();
-    local_time = (local_date.getHours()+offset/3600-1)%24
+    local_time = (local_date.getHours()+offset/3600-1)%24;
+    local_date.setHours(local_time);
+    sunrise_date.setFullYear(local_date.getFullYear())
+    sunset_date.setFullYear(local_date.getFullYear())
     localTimeDisplay.textContent = `🕛 Local time: ${local_time.toString().padStart(2,0)}:${local_date.getMinutes().toString().padStart(2,0)}:${local_date.getSeconds().toString().padStart(2,0)}`
     sunriseDisplay.textContent = `🌇 Sunrise time: ${sunrise_date.getHours().toString().padStart(2,0)}:${sunrise_date.getMinutes().toString().padStart(2,0)}:${sunrise_date.getSeconds().toString().padStart(2,0)}` //(UTC ${offset > 0 ? `+${(offset/60).toString().padStart(2,0)}`: (offset/60).toString().padStart(2,0)})`
     sunsetDisplay.textContent = `🌆 Sunset time: ${sunset_date.getHours().toString().padStart(2,0)}:${sunset_date.getMinutes().toString().padStart(2,0)}:${sunset_date.getSeconds().toString().padStart(2,0)}` //(UTC ${offset > 0 ? `+${(offset/60).toString().padStart(2,0)}`: (offset/60).toString().padStart(2,0)})`
@@ -94,7 +97,7 @@ function displayWeatherInfo(data){
 function getWeatherEmoji(weatherId){
     switch(true){
         case (weatherId >= 200 && weatherId < 300):
-            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            if(local_date > sunrise_date && local_date < sunset_date)
             {
                 card.style.color= "black";
                 card.style.backgroundPosition = "0px 50px";
@@ -111,7 +114,7 @@ function getWeatherEmoji(weatherId){
             
             return "⛈️";
         case (weatherId >= 300 && weatherId < 400):
-            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            if(local_date > sunrise_date && local_date < sunset_date)
             {
                 card.style.color= "black";
                 card.style.backgroundPosition = "center";
@@ -126,7 +129,7 @@ function getWeatherEmoji(weatherId){
             }
             return "🌨️";
         case (weatherId >= 500 && weatherId < 600):
-            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            if(local_date > sunrise_date && local_date < sunset_date)
             {
                 card.style.color= "black";
                 card.style.backgroundPosition = "center";
@@ -143,7 +146,7 @@ function getWeatherEmoji(weatherId){
             
             return "🌧️";
         case (weatherId >= 600 && weatherId < 700):
-            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            if(local_date > sunrise_date && local_date < sunset_date)
             {
                 card.style.color= "black";
                 card.style.backgroundPosition = "center";
@@ -158,7 +161,7 @@ function getWeatherEmoji(weatherId){
             
             return "❄️";
         case (weatherId >= 700 && weatherId < 800):
-            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            if(local_date > sunrise_date && local_date < sunset_date)
             {
                 card.style.color= "black";
                 card.style.backgroundPosition = "center";
@@ -174,7 +177,7 @@ function getWeatherEmoji(weatherId){
             
             return "🌫️";
         case (weatherId == 800):
-            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            if(local_date > sunrise_date && local_date < sunset_date)
             {
                 card.style.color= "black";
                 card.style.backgroundPosition = "-200px";
@@ -192,7 +195,7 @@ function getWeatherEmoji(weatherId){
             
             
         case (weatherId > 800 && weatherId <= 809):
-            if(local_time > sunrise_date.getHours() && local_time < sunset_date.getHours())
+            if(local_date > sunrise_date && local_date < sunset_date)
             {
                 card.style.color= "white";
                 card.style.backgroundPosition = "-200px";
