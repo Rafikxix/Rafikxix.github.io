@@ -32,7 +32,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(180deg, rgba(44, 44, 250, 0.9), rgba(255, 68, 0, 0.721));
+    background: linear-gradient(180deg, rgb(44, 44, 250), rgb(255, 68, 0));
     color: white;
 }
 
