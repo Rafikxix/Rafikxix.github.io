@@ -13,6 +13,9 @@ tempDisplay.classList.add("tempDisplay");
 const humidityDisplay = document.createElement("p")
 humidityDisplay.classList.add("humidityDisplay");
 
+const windDisplay = document.createElement("p")
+windDisplay.classList.add("humidityDisplay");
+
 const localTimeDisplay = document.createElement("p");
 localTimeDisplay.classList.add("timeDisplay");
 
@@ -65,7 +68,7 @@ function displayWeatherInfo(data){
     console.log(data)
     // let offset = new Date().getTimezoneOffset();
     // offset = -offset;
-    const {name: city,sys:{country,id_,sunrise,sunset}, main: {temp, humidity},timezone: offset, weather: [{description, id}]} = data; //destructuring
+    let {name: city,sys:{country,id_,sunrise,sunset}, main: {temp,temp_max,temp_min, humidity},timezone: offset, weather: [{description, id}],wind: {speed}} = data; //destructuring
     card.textContent = "";
     card.style.display = "flex";
     cityDisplay.textContent = `${city}(${getFlagEmoji(country)})`;
@@ -81,11 +84,14 @@ function displayWeatherInfo(data){
     sunsetDisplay.textContent = `🌆 Sunset time: ${sunset_date.getHours().toString().padStart(2,0)}:${sunset_date.getMinutes().toString().padStart(2,0)}:${sunset_date.getSeconds().toString().padStart(2,0)}` //(UTC ${offset > 0 ? `+${(offset/60).toString().padStart(2,0)}`: (offset/60).toString().padStart(2,0)})`
     tempDisplay.textContent = `${(temp - 273.15).toFixed(1)}°C | ${(((temp - 273.15) * 1.8) + 32).toFixed(1)}°F`;
     humidityDisplay.textContent = `💦 Humidity: ${humidity}%`;
+    speed = speed*3600/1000;
+    windDisplay.textContent = `Wind speed: ${speed.toFixed(2)} km/h | ${(speed/1.609344).toFixed(2)} mi/h`;
     descDisplay.textContent = description;
     weatherEmoji.textContent = getWeatherEmoji(id);
 
     card.appendChild(cityDisplay);
     card.appendChild(tempDisplay);
+    card.appendChild(windDisplay);
     card.appendChild(humidityDisplay);
     card.appendChild(localTimeDisplay);
     card.appendChild(sunriseDisplay);
