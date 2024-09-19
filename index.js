@@ -75,7 +75,10 @@ function displayWeatherInfo(data){
     sunrise_date = new Date(0,0,0,0,0,sunrise+offset);
     sunset_date = new Date(0,0,0,0,0,sunset+offset);
     local_date = new Date();
-    local_time = (local_date.getHours()+offset/3600-1)%24;
+    if(local_date.getHours() >= 12)
+        local_time = (local_date.getHours()+offset/3600-1)%24;
+    else
+        local_time = (local_date.getHours()+offset/3600+23)%24;
     local_date.setHours(local_time);
     sunrise_date.setFullYear(local_date.getFullYear())
     sunset_date.setFullYear(local_date.getFullYear())
